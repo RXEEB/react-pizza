@@ -1,0 +1,26 @@
+.root {
+    li {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        border: 1px solid #fe5f1e;
+        border-radius: 30px;
+        margin-right: 10px;
+        position: relative;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        
+        &:hover{
+            bottom: 3px;
+        }
+    }
+}
+
+// :global{
+//     .previous{
+
+//     }
