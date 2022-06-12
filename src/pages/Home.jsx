@@ -7,9 +7,11 @@ import { Sceleton } from '../components/PizzaBlock/Skeleton'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId, setCurentPage } from '../redux/slices/filterSlices'
 import axios from 'axios'
+import {SearchContext} from '../App'
 
-export const Home = ({ searchValue }) => {
+export const Home = () => {
   const dispatch = useDispatch()
+  const {searchValue} = React.useContext(SearchContext)
   const { categoryId, sort , curentPage} = useSelector((state) => state.filter)
 
   const [items, setItems] = React.useState([])
