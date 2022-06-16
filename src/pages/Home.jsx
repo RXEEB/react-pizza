@@ -5,14 +5,14 @@ import { Sort } from '../components/Sort';
 import { PizzaBlock } from '../components/PizzaBlock';
 import { Sceleton } from '../components/PizzaBlock/Skeleton'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId, setCurentPage } from '../redux/slices/filterSlices'
+import { setCategoryId, setPageCount } from '../redux/slices/filterSlices'
 import axios from 'axios'
 import {SearchContext} from '../App'
 
 export const Home = () => {
   const dispatch = useDispatch()
   const {searchValue} = React.useContext(SearchContext)
-  const { categoryId, sort , curentPage} = useSelector((state) => state.filter)
+  const { categoryId, sort , pageCount} = useSelector((state) => state.filter)
 
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
@@ -23,7 +23,7 @@ export const Home = () => {
 
   }
   const onChangePage = (number) => {
-    dispatch(setCurentPage(number))
+    dispatch(setPageCount(number))
 
   }
 
@@ -36,7 +36,7 @@ export const Home = () => {
     const search = searchValue ? `&search =${searchValue}` : ''
 
 
-    axios.get(`https://6281a8369fac04c654078cb9.mockapi.io/items?page=${curentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
+    axios.get(`https://6281a8369fac04c654078cb9.mockapi.io/items?page=${pageCount}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
       .then((res) => {
         setItems(res.data)
         setIsLoading(false)
@@ -44,7 +44,7 @@ export const Home = () => {
 
 
     window.scrollTo(0, 0)
-  }, [categoryId, sort.sortProperty, searchValue, curentPage])
+  }, [categoryId, sort.sortProperty, searchValue, pageCount])
 
   const pizzas = items.filter(obj => {
     if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
@@ -66,7 +66,7 @@ export const Home = () => {
       <div className="content__items">
         {isLoading ? sceletons : pizzas}
       </div>
-      <Pagination tion curentPage= {curentPage} onChangePage={onChangePage} />
+      <Pagination tion curentPage= {pageCount} onChangePage={onChangePage} />
     </div>
   )
 }

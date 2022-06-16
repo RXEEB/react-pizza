@@ -5,8 +5,8 @@ import {SearchContext} from '../../App'
 
 
 const testDebounce = debounce(() => {
- console.log(11111)
-}, 250)
+ console.log('сапрос на север')
+}, 2050)                                      // не работает!!!!
 
 export const Search = () => {
   const {searchValue,setSearchValue} = React.useContext(SearchContext)
